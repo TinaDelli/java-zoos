@@ -1,5 +1,7 @@
 package com.lambdaschool.zoo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +16,9 @@ public class Animal
 
     private String animaltype;
 
-    @ManyToMany
-    @JoinTable(name = "zooanimals",
-               joinColumns = {@JoinColumn(name = "zooid")},
-               inverseJoinColumns = {@JoinColumn(name = "animalid")})
-
-    private List<Zoo> zoos = new ArrayList<>();
+   @ManyToMany(mappedBy = "animals")
+   @JsonIgnoreProperties("animals")
+   private List<Zoo> zoos = new ArrayList<>();
 
     public Animal()
     {

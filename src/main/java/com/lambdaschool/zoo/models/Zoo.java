@@ -1,5 +1,7 @@
 package com.lambdaschool.zoo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,15 @@ public class Zoo
     private String zooname;
 
     @OneToMany(mappedBy = "zoo")
+    @JsonIgnoreProperties("zoos")
     private List<Telephone> telephones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "zoo")
+    @ManyToMany
+    @JoinTable(name = "zooanimals",
+               joinColumns = {@JoinColumn(name = "zooid")},
+               inverseJoinColumns = {@JoinColumn(name = "animalid")})
+    @JsonIgnoreProperties("zoos")
     private List<Animal> animals = new ArrayList<>();
-
     public Zoo()
     {
     }

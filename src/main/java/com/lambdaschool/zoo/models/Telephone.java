@@ -1,5 +1,7 @@
 package com.lambdaschool.zoo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Telephone
 
     @ManyToOne
     @JoinColumn(name = "zooid")
+    @JsonIgnoreProperties("telephones")
     private Zoo zoo;
 
     public Telephone()
