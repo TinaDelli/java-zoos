@@ -1,9 +1,11 @@
 package com.lambdaschool.zoo.services;
 
+import com.lambdaschool.zoo.models.Telephone;
 import com.lambdaschool.zoo.models.Zoo;
 import com.lambdaschool.zoo.repos.ZooRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class ZooServiceImpl implements ZooService
         return list;
     }
 
+    @Transactional
     @Override
     public Zoo updateZoo(Zoo zoo, long id)
     {
@@ -39,6 +42,32 @@ public class ZooServiceImpl implements ZooService
         }
 
         return zoorepos.save(currentZoo);
+    }
+
+    @Override
+    public Zoo saveZoo(Zoo zoo)
+    {
+        Zoo newZoo = new Zoo();
+        newZoo.setZooname(zoo.getZooname());
+
+        for (Telephone t: zoo.getTelephones())
+        {
+            newZoo.getTelephones().add(new Telephone(t.getPhonetype(), t.getPhonenumber()));
+        }
+        return zoorepos.save(newZoo);
+    }
+
+    @Override
+    public void deleteZoo(long id)
+    {
+        if(zoorepos.findById(id).isPresent())
+        {
+            zoorepos.deleteById(id);
+        }
+        else
+        {
+            throw new EntityNotFoundException(Long.toString(id));
+        }
     }
 
 }

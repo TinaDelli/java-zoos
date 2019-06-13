@@ -24,15 +24,21 @@ public class Telephone
     {
     }
 
-    public Telephone(String phonenumber)
-    {
-        this.phonenumber = phonenumber;
-    }
+//    public Telephone(String phonenumber)
+//    {
+//        this.phonenumber = phonenumber;
+//    }
 
     public Telephone(String phonenumber, Zoo zoo)
     {
         this.phonenumber = phonenumber;
         this.zoo = zoo;
+    }
+
+    public Telephone(String phonetype, String phonenumber)
+    {
+        this.phonetype = phonetype;
+        this.phonenumber = phonenumber;
     }
 
     public long getPhoneid()
