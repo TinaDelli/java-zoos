@@ -16,7 +16,10 @@ public class Zoo
 
     private String zooname;
 
-    @OneToMany(mappedBy = "zoo")
+    @OneToMany(mappedBy = "zoo",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true,
+    fetch = FetchType.LAZY)
     @JsonIgnoreProperties("zoos")
     private List<Telephone> telephones = new ArrayList<>();
 

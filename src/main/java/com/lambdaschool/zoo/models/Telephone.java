@@ -29,8 +29,9 @@ public class Telephone
 //        this.phonenumber = phonenumber;
 //    }
 
-    public Telephone(String phonenumber, Zoo zoo)
+    public Telephone(String phonetype, String phonenumber, Zoo zoo)
     {
+        this.phonetype = phonetype;
         this.phonenumber = phonenumber;
         this.zoo = zoo;
     }

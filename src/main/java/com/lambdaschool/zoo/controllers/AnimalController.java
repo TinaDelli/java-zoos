@@ -55,7 +55,7 @@ public class AnimalController
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newCustomerURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/admin/zoos/{id}").buildAndExpand(newZoo.getZooid()).toUri();
+                .path("/{id}").buildAndExpand(newZoo.getZooid()).toUri();
         responseHeaders.setLocation(newCustomerURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);

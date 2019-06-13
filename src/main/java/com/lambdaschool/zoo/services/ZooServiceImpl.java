@@ -52,7 +52,7 @@ public class ZooServiceImpl implements ZooService
 
         for (Telephone t: zoo.getTelephones())
         {
-            newZoo.getTelephones().add(new Telephone(t.getPhonetype(), t.getPhonenumber()));
+            newZoo.getTelephones().add(new Telephone(t.getPhonetype(), t.getPhonenumber(), newZoo));
         }
         return zoorepos.save(newZoo);
     }
