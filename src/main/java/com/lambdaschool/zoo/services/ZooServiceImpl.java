@@ -24,6 +24,13 @@ public class ZooServiceImpl implements ZooService
         return list;
     }
 
+    @Override
+    public Zoo findZooById(long id)
+    {
+        return zoorepos.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+    }
+
     @Transactional
     @Override
     public Zoo updateZoo(Zoo zoo, long id)

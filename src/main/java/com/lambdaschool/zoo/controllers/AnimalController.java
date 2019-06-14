@@ -20,8 +20,6 @@ public class AnimalController
     @Autowired
     private AnimalService animalService;
 
-    @Autowired
-    private ZooService zooService;
 
     @GetMapping(value = "/animals/count", produces = {"application/json"})
     public ResponseEntity<?> getCountZoosInAnimals()
@@ -29,43 +27,12 @@ public class AnimalController
         return new ResponseEntity<>(animalService.getCountZoosInAnimals(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/zoos/zoos", produces = {"application/json"})
-    public ResponseEntity<?> listAllZoos()
+
+    @GetMapping(value = "/animals",
+                produces = {"application/json"})
+    public ResponseEntity<?> listAllAnimals()
     {
-        ArrayList<Zoo> zooList = zooService.findAll();
-        return new ResponseEntity<>(zooList, HttpStatus.OK);
+        return new ResponseEntity<>(animalService.findAll(), HttpStatus.OK);
     }
-
-    @PutMapping(value = "/admin/zoos/{id}", consumes = {"application/json"})
-    public ResponseEntity<?> updateZooById(
-            @RequestBody
-            Zoo updateZoo,
-            @PathVariable
-            long id)
-    {
-        zooService.updateZoo(updateZoo, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/admin/zoos", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addNewZoo(@Valid
-                                       @RequestBody Zoo newZoo)
-    {
-        newZoo = zooService.saveZoo(newZoo);
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newCustomerURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(newZoo.getZooid()).toUri();
-        responseHeaders.setLocation(newCustomerURI);
-
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping(value = "/admin/zoos/{id}")
-        public ResponseEntity<?> deleteZooById(@PathVariable long id)
-        {
-            zooService.deleteZoo(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
 
 }
