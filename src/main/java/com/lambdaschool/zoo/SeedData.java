@@ -34,9 +34,6 @@ public class SeedData implements CommandLineRunner
 
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(), r1));
-//        admins.add(new UserRoles(new User(), r2));
-//        admins.add(new UserRoles(new User(), r3));
-//        admins.add(new UserRoles(new User(), r4));
 
         ArrayList<UserRoles> zoodata = new ArrayList<>();
         zoodata.add(new UserRoles(new User(), r2));
